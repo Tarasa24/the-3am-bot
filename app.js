@@ -14,7 +14,7 @@ function scheduler() {
         offset = 0
     };
     sysDate.setDate(sysDate.getDate() + offset);
-    sysDate.setHours(4);
+    sysDate.setHours(3);
     sysDate.setMinutes(0);
     sysDate.setSeconds(0);
     sysDate.setMilliseconds(0);
