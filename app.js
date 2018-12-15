@@ -54,6 +54,7 @@ function convertMS(ms) {
 
 
 client.on('ready', () => {
+    client.user.setPresence({ game: { name: '!add _link_' }, status: 'online' })
     console.log(`Logged in as ${client.user.tag}!`);
     scheduler();
 });
