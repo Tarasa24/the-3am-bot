@@ -8,7 +8,9 @@ client.on('ready', () => {
 
 client.on('message', msg => {
   if (msg.content === 'ping') {
-    msg.reply('Pong!');
+  	var msgDate = msg.timestamp.createdAt;
+  	var sysDate = Date.now();
+    msg.reply(`Latency: ${sysDate - msgDate}ms`);
   }
 });
 
