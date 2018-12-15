@@ -77,12 +77,8 @@ client.on('message', msg => {
         if (list.length < 2) {
             msg.author.send("Wrong format...\n**Please use**\n```!add _link_```")
         } else {
-            if (list[1].includes("http://") || list[1].includes("https://")) {
-                queue.push(list[1])
-                msg.author.send("Your link was successfully added to the queue")
-            } else {
-                msg.author.send("Your link doesn´t include *http://* or *https://*")
-            }
+            queue.push(list[1])
+            msg.author.send("Your link was successfully added to the queue")
         }
         if (msg.deletable) {
             msg.delete();
