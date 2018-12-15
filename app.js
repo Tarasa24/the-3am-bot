@@ -8,7 +8,7 @@ var queue = []
 function scheduler() {
     var sysDate = new Date();
 
-    console.log("Local time: " + sysDate.toISOString())
+    console.log("Local time: " + sysDate.toUTCString());
     offset = 1;
     if (sysDate.getHours() < 3) {
         offset = 0
@@ -18,7 +18,7 @@ function scheduler() {
     sysDate.setMinutes(0);
     sysDate.setSeconds(0);
     sysDate.setMilliseconds(0);
-    console.log("Desired time: " + sysDate.toISOString());
+    console.log("Desired time: " + sysDate.toUTCString());
 
 
     delay = sysDate - Date.now()
