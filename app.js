@@ -10,7 +10,7 @@ function scheduler() {
 
     console.log("Local time: " + sysDate.toUTCString());
     offset = 1;
-    if (sysDate.getHours() < 3) {
+    if (sysDate.getHours() < 2) {
         offset = 0
     };
     sysDate.setDate(sysDate.getDate() + offset);
@@ -27,12 +27,15 @@ function scheduler() {
     var channel = client.channels.get(process.env.serverID)
     setTimeout(function() {
         queue.forEach(function(element) {
-            channel.send(`@everyone ${element}`);
+            channel.send(`---------- ${queue.length} image(s) were posted ----------`);
         });
-        // Clearing the que
+        console.log(`${element}`)
+        // Clearing the queue
         queue.length = 0
-        console.log("-------------------------------------")
-        scheduler();
+        // Fixing negative timout calculation
+        setTimeout(function() {
+            scheduler();
+        }, 2000);   
     }, delay);
 }
 
