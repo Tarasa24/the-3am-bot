@@ -44,7 +44,7 @@ function scheduler() {
             });
 
 
-    }, 1000);
+    }, delay);
 };
 
 function convertMS(ms) {
