@@ -1,15 +1,24 @@
 {
   "name": "the-3am-bot",
   "version": "1.0.0",
-  "description": "",
+  "description": "Have you ever feel like posting some questionable picture or link to your discord, but you  don't  hate  yourself  and want to get at least some sleep? **The 3am Bot** is right choice for you.",
   "main": "app.js",
   "dependencies": {
-    "discord.js": "^11.4.2"
+    "discord.js": "^11.4.2",
+    "google-spreadsheet": "^2.0.6"
   },
   "devDependencies": {},
   "scripts": {
     "start": "node index.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tarasa24/the-3am-bot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Tarasa24/the-3am-bot/issues"
+  },
+  "homepage": "https://github.com/Tarasa24/the-3am-bot#readme"
 }
