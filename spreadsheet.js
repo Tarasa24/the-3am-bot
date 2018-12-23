@@ -1,21 +1,21 @@
 const GoogleSpreadsheet = require('google-spreadsheet')
 const { promisify } = require('util')
 
+
 var creds = {
     client_email: process.env.client_email,
     private_key: process.env.private_key
 }
 
-const SPREADSHEET_ID = process.env.SPREADSHEET_ID
+const SPREADSHEET_ID = process.env.SPREADSHEET_ID;
 
 
 module.exports = {
-    AddLink: async function(link) {
+    Add: async function(link) {
         const doc = new GoogleSpreadsheet(SPREADSHEET_ID)
         await promisify(doc.useServiceAccountAuth)(creds)
         const info = await promisify(doc.getInfo)()
         const sheet = info.worksheets[0]
-
         const cells = await promisify(sheet.getCells)({
             'min-row': 1,
             'max-row': 50,
@@ -28,11 +28,10 @@ module.exports = {
             if (cell.value === "") {
                 cell.value = link;
 
-                await cell.save(); //async
-                return true;
+                await cell.save();
+                break;
             }
         }
-        return false;
     },
     ClearQueue: async function() {
         const doc = new GoogleSpreadsheet(SPREADSHEET_ID)
@@ -49,7 +48,7 @@ module.exports = {
         })
 
         for (const cell of cells) {
-            if (cell.value != ""){
+            if (cell.value != "") {
                 cell.value = "";
                 await cell.save();
             }
@@ -72,7 +71,7 @@ module.exports = {
         var count = 0;
 
         for (const cell of cells) {
-            if (cell.value != ""){
+            if (cell.value != "") {
                 count += 1;
             }
         }
@@ -96,7 +95,7 @@ module.exports = {
         var queue = [];
 
         for (const cell of cells) {
-            if (cell.value != ""){
+            if (cell.value != "") {
                 queue.push(cell.value);
             }
         }
