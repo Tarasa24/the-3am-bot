@@ -30,17 +30,36 @@ function scheduler() {
         spreadsheet.GetQueue()
             .then(queue => {
                 var successfull = 0
-                var unsuccessfull = queue.length;
-                queue.forEach(function(element) {
-                    if (element.slice(-5).indexOf(".") > 0) {
-                        channel.send({
-                                files: [element]
-                            })
+                var unsuccessfull = queue.link.length;
+
+                for (var i = 0; i < unsuccessfull; i++) {
+                    if (queue.link[i].slice(-5).indexOf(".") > 0) {
+                        const embed = {
+                            "color": 9442302,
+                            "image": {
+                                "url": queue.link[i]
+                            },
+                            "footer": {
+                                "text": queue.username[i],
+                                "icon_url": queue.icon[i]
+                            }
+                        };
+                        channel.send({ embed })
                             .then(successfull += 1);
+
+
                     } else {
-                        channel.send(element)
+                        channel.send(queue.link[i])
+                        const embed = {
+                            "color": 16711680,
+                            "footer": {
+                                "text": queue.username[i],
+                                "icon_url": queue.icon[i]
+                            }
+                        };
+                        channel.send({ embed })
                     }
-                });
+                }
 
                 //log
                 unsuccessfull -= successfull
@@ -96,8 +115,10 @@ client.on('message', msg => {
             msg.reply(convertMS(client.uptime));
 
         } else {
+            var author = msg.author.username
+            var author_icon = msg.author.avatarURL
             msg.attachments.forEach(function(attachment) {
-                spreadsheet.Add(attachment.url)
+                spreadsheet.Add(attachment.url, author, author_icon)
                     .then(msg.reply("File was successfully added to the queue"))
                     .catch(err => {
                         console.error(err);
@@ -105,7 +126,7 @@ client.on('message', msg => {
             })
 
             if (validUrl.isUri(msg.content)) {
-                spreadsheet.Add(msg.content)
+                spreadsheet.Add(msg.content, author, author_icon)
                 msg.reply("Link was successfully added to the queue")
             }
         }
