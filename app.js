@@ -35,6 +35,11 @@ function scheduler() {
             var user = await client.fetchUser(queue.user_id[i]);
             var nick = user.username;
             var icon_url = user.avatarURL;
+
+            if (icon_url == "") {
+              icon_url = "https://cdn.discordapp.com/embed/avatars/0.png";
+            }
+
             if (queue.link[i].slice(-5).indexOf(".") > 0) {
 
                 const embed = {
@@ -115,7 +120,7 @@ client.on('message', msg => {
 
         } else if (msg.content === 'uptime') {
             msg.reply(convertMS(client.uptime));
-            
+
         } else {
             var author_id = msg.author.id
             msg.attachments.forEach(function(attachment) {
